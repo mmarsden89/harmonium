@@ -1,5 +1,5 @@
 {
-  "name": "harmonium",
+  "name": "harmonium-client",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
