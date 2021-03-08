@@ -12,7 +12,7 @@ const Navbar = () => {
       <Brand
         linkPath="/"
         imagePath={process.env.PUBLIC_URL + "/images/textlogo.png"}
-        altTag="logo alt tag"
+        altTag="hello menu logo"
       />
       <TopBar.Item>
         <Menu horizontalLeft>
