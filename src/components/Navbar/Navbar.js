@@ -11,9 +11,8 @@ const Navbar = () => {
     <TopBar>
       <Brand
         linkPath="/"
-        imagePath={process.env.PUBLIC_URL + "/images/logo.png"}
+        imagePath={process.env.PUBLIC_URL + "/images/textlogo.png"}
         altTag="logo alt tag"
-        children="Hello Menu"
       />
       <TopBar.Item>
         <Menu horizontalLeft>
