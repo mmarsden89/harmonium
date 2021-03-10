@@ -5,9 +5,11 @@ const fetchRecipes = async (props) => {
   const api_key = "240b8446f07f478ca0cf156d30e46e05";
   const url = `${base_api}${api_key}`;
 
-  const data = await (await fetch(url)).json();
-
-  return data;
+  await fetch(url)
+    .then((response) => {
+      return response;
+    })
+    .catch((err) => console.log(err));
 };
 
 export default fetchRecipes;
