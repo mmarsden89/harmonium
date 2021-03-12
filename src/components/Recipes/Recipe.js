@@ -4,6 +4,7 @@ import Card from "harmonium/lib/Card";
 import Col from "harmonium/lib/Col";
 import Row from "harmonium/lib/Row";
 import { titleShortener } from "../../utils.js";
+import "./Recipe.scss";
 
 const Recipe = (props) => {
   const [recipes, setRecipes] = useState([]);
@@ -54,9 +55,7 @@ const Recipe = (props) => {
     </Col>
   ));
 
-  return (
-    <div style={{ marginTop: "50px", padding: "0 50px" }}>{recipeMap}</div>
-  );
+  return <div className="recipe-container">{recipeMap}</div>;
 };
 
 export default Recipe;
