@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import Card from "harmonium/lib/Card";
 import Col from "harmonium/lib/Col";
 import Row from "harmonium/lib/Row";
+import { titleShortener } from "../../utils.js";
 
 const Recipe = (props) => {
   const [recipes, setRecipes] = useState([]);
@@ -13,28 +14,49 @@ const Recipe = (props) => {
     console.log(recipesFetch);
   }, []);
 
+  const listCuisines = (cuisines) => {
+    return cuisines.length > 0
+      ? cuisines.map((cuisine) => `${cuisine} `)
+      : "none";
+  };
+
   const recipeMap = recipes.map((item) => (
     <Col large={3}>
       <Card primary>
         <Card.Header>
           <Row className="rev-Row--flex rev-Row--middle">
             <Col>
-              <h5>{item.title}</h5>
+              <h5>{titleShortener(item.title)}</h5>
             </Col>
           </Row>
         </Card.Header>
         <Card.Body>
           <Row>
             <Col>
-              <img src={item.image} className="ResponsiveImage" />
+              <img
+                src={
+                  item.image ||
+                  process.env.PUBLIC_URL + "/images/noimageavailable.png"
+                }
+                className="ResponsiveImage"
+              />
             </Col>
           </Row>
         </Card.Body>
+        <Card.Footer>
+          <Row>
+            <Col>
+              <h6>{listCuisines(item.cuisines)}</h6>
+            </Col>
+          </Row>
+        </Card.Footer>
       </Card>
     </Col>
   ));
 
-  return <div>{recipeMap}</div>;
+  return (
+    <div style={{ marginTop: "50px", padding: "0 50px" }}>{recipeMap}</div>
+  );
 };
 
 export default Recipe;
