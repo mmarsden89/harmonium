@@ -6,7 +6,12 @@ import Row from "harmonium/lib/Row";
 import { titleShortener } from "../../utils.js";
 import "./Recipe.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faHourglassHalf } from "@fortawesome/free-solid-svg-icons";
+import {
+  faHourglassHalf,
+  faLeaf,
+  faBookMedical,
+  faChartPie,
+} from "@fortawesome/free-solid-svg-icons";
 
 const Recipe = (props) => {
   const [recipes, setRecipes] = useState([]);
@@ -48,7 +53,18 @@ const Recipe = (props) => {
           <Row>
             <Col>
               <FontAwesomeIcon icon={faHourglassHalf} />
-              {item.readyInMinutes} min
+              &nbsp;{item.readyInMinutes} min
+              {item.vegetarian ? (
+                <FontAwesomeIcon icon={faLeaf} style={{ color: "green" }} />
+              ) : null}
+              {item.veryHealthy ? (
+                <FontAwesomeIcon
+                  icon={faBookMedical}
+                  style={{ color: "darkred" }}
+                />
+              ) : null}
+              <FontAwesomeIcon icon={faChartPie} />
+              &nbsp; {item.servings}
             </Col>
           </Row>
         </Card.Body>
