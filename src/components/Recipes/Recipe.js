@@ -15,18 +15,31 @@ import {
 
 const Recipe = (props) => {
   const [recipes, setRecipes] = useState([]);
+  const [diet, setDiet] = useState(["vegan"]);
 
   useEffect(async () => {
-    const recipesFetch = await fetchRecipes();
+    const recipesFetch = await fetchRecipes(diet);
     setRecipes(recipesFetch);
     console.log(recipesFetch);
-  }, []);
+  }, [diet]);
 
   const listCuisines = (cuisines) => {
     return cuisines.length > 0
       ? cuisines.map((cuisine) => `${cuisine} `)
       : "none";
   };
+
+  const handleDiet = () => {
+    const tempDiet = [...diet];
+    if (!tempDiet.includes("vegetarian")) tempDiet.push("vegetarian");
+    setDiet(tempDiet);
+  };
+
+  const dietMap = diet.map((item) => (
+    <div small={2} className="query-tag">
+      {item}
+    </div>
+  ));
 
   const recipeMap = recipes.map((item) => (
     <Col large={3}>
@@ -53,18 +66,23 @@ const Recipe = (props) => {
           <Row>
             <Col>
               <FontAwesomeIcon icon={faHourglassHalf} />
-              &nbsp;{item.readyInMinutes} min
+              &nbsp;{item.readyInMinutes} min &nbsp;
+              <FontAwesomeIcon icon={faChartPie} />
+              &nbsp; {item.servings} &nbsp;
               {item.vegetarian ? (
-                <FontAwesomeIcon icon={faLeaf} style={{ color: "green" }} />
+                <FontAwesomeIcon
+                  icon={faLeaf}
+                  style={{ color: "green" }}
+                  onClick={handleDiet}
+                />
               ) : null}
+              &nbsp;&nbsp;
               {item.veryHealthy ? (
                 <FontAwesomeIcon
                   icon={faBookMedical}
                   style={{ color: "darkred" }}
                 />
               ) : null}
-              <FontAwesomeIcon icon={faChartPie} />
-              &nbsp; {item.servings}
             </Col>
           </Row>
         </Card.Body>
@@ -79,7 +97,12 @@ const Recipe = (props) => {
     </Col>
   ));
 
-  return <div className="recipe-container">{recipeMap}</div>;
+  return (
+    <div className="recipe-container">
+      <div className="tag-container">{dietMap}</div>
+      {recipeMap}
+    </div>
+  );
 };
 
 export default Recipe;

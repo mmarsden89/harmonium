@@ -5,4 +5,20 @@
   h6 {
     color: black;
   }
+
+  .tag-container {
+    height: 50px;
+    display: flex;
+    flex-direction: row;
+    margin: 0 auto;
+    width: 100%;
+  }
+
+  .query-tag {
+    padding: 5px 10px;
+    text-align: center;
+    background-color: lightblue;
+    margin: auto;
+    border-radius: 10px;
+  }
 }
