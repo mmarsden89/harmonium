@@ -15,10 +15,15 @@
   }
 
   .query-tag {
-    padding: 5px 10px;
+    padding: 0px 10px;
+    height: 25px;
     text-align: center;
     background-color: lightblue;
     margin: auto;
     border-radius: 10px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
   }
 }

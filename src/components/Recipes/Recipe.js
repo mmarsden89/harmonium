@@ -40,9 +40,20 @@ const Recipe = (props) => {
     setQueryParams([...queryParams, "vegetarian"]);
   };
 
+  const handleDietDefault = () => {
+    setDiet("");
+    setQueryParams([]);
+  };
+
   const dietMap = queryParams.map((item) => (
-    <div small={2} className="query-tag">
-      {item}
+    <div className="query-tag">
+      <div>{item}</div>
+      <div
+        style={{ padding: "0px 5px", fontWeight: "900" }}
+        onClick={handleDietDefault}
+      >
+        x
+      </div>
     </div>
   ));
 
