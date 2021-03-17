@@ -16,12 +16,17 @@ import {
 const Recipe = (props) => {
   const [recipes, setRecipes] = useState([]);
   const [diet, setDiet] = useState("");
+  const [queryParams, setQueryParams] = useState([]);
+  const [context, setContext] = useState("random");
+  const [loading, setLoading] = useState(false);
 
   useEffect(async () => {
-    const recipesFetch = await fetchRecipes(diet);
+    setLoading(true);
+    const recipesFetch = await fetchRecipes(context, diet);
     setRecipes(recipesFetch);
-    console.log(recipesFetch);
-  }, [diet]);
+    console.log("recipe---s>>>", recipesFetch);
+    setLoading(false);
+  }, [diet, queryParams]);
 
   const listCuisines = (cuisines) => {
     return cuisines.length > 0
@@ -31,9 +36,11 @@ const Recipe = (props) => {
 
   const handleDiet = () => {
     setDiet("vegetarian");
+    setContext("complexSearch");
+    setQueryParams([...queryParams, "vegetarian"]);
   };
 
-  const dietMap = diet.map((item) => (
+  const dietMap = queryParams.map((item) => (
     <div small={2} className="query-tag">
       {item}
     </div>
@@ -98,7 +105,7 @@ const Recipe = (props) => {
   return (
     <div className="recipe-container">
       <div className="tag-container">{dietMap}</div>
-      {recipeMap}
+      {!loading && recipeMap}
     </div>
   );
 };
