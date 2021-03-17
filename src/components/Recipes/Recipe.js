@@ -15,7 +15,7 @@ import {
 
 const Recipe = (props) => {
   const [recipes, setRecipes] = useState([]);
-  const [diet, setDiet] = useState(["vegan"]);
+  const [diet, setDiet] = useState("");
 
   useEffect(async () => {
     const recipesFetch = await fetchRecipes(diet);
@@ -30,9 +30,7 @@ const Recipe = (props) => {
   };
 
   const handleDiet = () => {
-    const tempDiet = [...diet];
-    if (!tempDiet.includes("vegetarian")) tempDiet.push("vegetarian");
-    setDiet(tempDiet);
+    setDiet("vegetarian");
   };
 
   const dietMap = diet.map((item) => (
