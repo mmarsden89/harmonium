@@ -15,20 +15,10 @@ const Navbar = () => {
         altTag="hello menu logo"
       />
       <TopBar.Item>
-        <Menu horizontalLeft>
-          <Menu.Item>
-            <a href="#one">One</a>
-          </Menu.Item>
-          <Menu.Item>
-            <a href="#two">Two</a>
-          </Menu.Item>
-        </Menu>
-      </TopBar.Item>
-      <TopBar.Item>
         <Form>
           <InputGroup>
             <InputGroup.Field>
-              <Input type="text" placeholder="Search" />
+              <Input type="text" placeholder="Search Recipes" />
             </InputGroup.Field>
             <Button>Search</Button>
           </InputGroup>
