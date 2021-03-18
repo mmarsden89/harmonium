@@ -1,5 +1,6 @@
-import fetchRecipes from "./api";
+import { fetchRecipes } from "./api";
 import React, { useEffect, useState } from "react";
+import TagSearch from "./TagSearch";
 import Card from "harmonium/lib/Card";
 import Col from "harmonium/lib/Col";
 import Row from "harmonium/lib/Row";
@@ -115,6 +116,7 @@ const Recipe = (props) => {
 
   return (
     <div className="recipe-container">
+      <TagSearch />
       <div className="tag-container">{dietMap}</div>
       {!loading && recipeMap}
     </div>
