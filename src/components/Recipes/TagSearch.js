@@ -14,16 +14,28 @@ const TagSearch = () => {
 
   const handleChange = async (e) => {
     console.log(e.target.value);
-    if (e.target.value.length > 2) {
+    if (e.target.value.length > 1) {
       const data = await searchRecipes(e.target.value);
       setSearchReturn(data);
+    } else {
+      setSearchReturn([]);
     }
   };
 
-  const searchMap = searchReturn.map((item) => <div>{item.title}</div>);
+  const searchMap = searchReturn.map((item) => (
+    <div style={{ backgroundColor: "white" }}>{item.title}</div>
+  ));
 
   return (
-    <Form style={{ position: "absolute", zIndex: "1000", top: "100px" }}>
+    <Form
+      style={{
+        position: "absolute",
+        zIndex: "1000",
+        top: "100px",
+        width: "70%",
+        left: "15%",
+      }}
+    >
       <InputGroup>
         <InputGroup.Field>
           <Input
