@@ -7,7 +7,7 @@ import Input from "harmonium/lib/Input";
 
 import { searchRecipes } from "./api.js";
 
-const TagSearch = () => {
+const RecipeSearch = () => {
   const [searchReturn, setSearchReturn] = useState([]);
 
   useEffect(() => {}, [searchReturn]);
@@ -51,4 +51,4 @@ const TagSearch = () => {
   );
 };
 
-export default TagSearch;
+export default RecipeSearch;
