@@ -7,6 +7,23 @@
     color: black;
   }
 
+  .search-item {
+    padding: 5px;
+    cursor: pointer;
+  }
+
+  .search-item:hover {
+    background-color: lightblue;
+  }
+
+  .search-item-container {
+    background-color: rgba(255, 255, 255, 0.9);
+    border: 1px solid black;
+    border-top: none;
+    margin-top: -30px;
+    padding-top: 10px;
+  }
+
   .tag-container {
     height: 50px;
     display: flex;

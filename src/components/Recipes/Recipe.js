@@ -1,5 +1,6 @@
-import { fetchRecipes } from "./api";
+import { fetchRecipes } from "../api";
 import React, { useEffect, useState } from "react";
+import RecipeSearch from "./RecipeSearch";
 import Card from "harmonium/lib/Card";
 import Col from "harmonium/lib/Col";
 import Row from "harmonium/lib/Row";
@@ -13,6 +14,8 @@ import {
   faChartPie,
 } from "@fortawesome/free-solid-svg-icons";
 
+import dummy from "../../dummy.json";
+
 const Recipe = (props) => {
   const [recipes, setRecipes] = useState([]);
   const [diet, setDiet] = useState("");
@@ -22,9 +25,11 @@ const Recipe = (props) => {
 
   useEffect(async () => {
     setLoading(true);
-    const recipesFetch = await fetchRecipes(context, diet);
-    setRecipes(recipesFetch);
-    console.log("recipe---s>>>", recipesFetch);
+    // const recipesFetch = await fetchRecipes(context, diet);
+    // setRecipes(recipesFetch);
+    // console.log("recipe---s>>>", recipesFetch);
+    console.log("dummy--->", dummy);
+    setRecipes(dummy);
     setLoading(false);
   }, [diet, queryParams]);
 
@@ -115,6 +120,7 @@ const Recipe = (props) => {
 
   return (
     <div className="recipe-container">
+      <RecipeSearch />
       <div className="tag-container">{dietMap}</div>
       {!loading && recipeMap}
     </div>
