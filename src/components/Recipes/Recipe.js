@@ -14,6 +14,8 @@ import {
   faChartPie,
 } from "@fortawesome/free-solid-svg-icons";
 
+import { Link } from "react-router-dom";
+
 import dummy from "../../dummy.json";
 
 const Recipe = (props) => {
@@ -63,59 +65,66 @@ const Recipe = (props) => {
   ));
 
   const recipeMap = recipes.map((item) => (
-    <Col large={3}>
-      <Card primary>
-        <Card.Header>
-          <Row className="rev-Row--flex rev-Row--middle">
-            <Col>
-              <h5>{titleShortener(item.title)}</h5>
-            </Col>
-          </Row>
-        </Card.Header>
-        <Card.Body>
-          <Row>
-            <Col>
-              <img
-                src={
-                  item.image ||
-                  process.env.PUBLIC_URL + "/images/noimageavailable.png"
-                }
-                className="ResponsiveImage"
-              />
-            </Col>
-          </Row>
-          <Row>
-            <Col>
-              <FontAwesomeIcon icon={faHourglassHalf} />
-              &nbsp;{item.readyInMinutes} min &nbsp;
-              <FontAwesomeIcon icon={faChartPie} />
-              &nbsp; {item.servings} &nbsp;
-              {item.vegetarian ? (
-                <FontAwesomeIcon
-                  icon={faLeaf}
-                  style={{ color: "green" }}
-                  onClick={handleDiet}
+    <Link
+      to={{
+        pathname: `/recipes/${item.id}`,
+        state: { recipe: item },
+      }}
+    >
+      <Col large={3}>
+        <Card primary>
+          <Card.Header>
+            <Row className="rev-Row--flex rev-Row--middle">
+              <Col>
+                <h5>{titleShortener(item.title)}</h5>
+              </Col>
+            </Row>
+          </Card.Header>
+          <Card.Body>
+            <Row>
+              <Col>
+                <img
+                  src={
+                    item.image ||
+                    process.env.PUBLIC_URL + "/images/noimageavailable.png"
+                  }
+                  className="ResponsiveImage"
                 />
-              ) : null}
-              &nbsp;&nbsp;
-              {item.veryHealthy ? (
-                <FontAwesomeIcon
-                  icon={faBookMedical}
-                  style={{ color: "darkred" }}
-                />
-              ) : null}
-            </Col>
-          </Row>
-        </Card.Body>
-        <Card.Footer>
-          <Row>
-            <Col>
-              <h6>{listCuisines(item.cuisines)}</h6>
-            </Col>
-          </Row>
-        </Card.Footer>
-      </Card>
-    </Col>
+              </Col>
+            </Row>
+            <Row>
+              <Col>
+                <FontAwesomeIcon icon={faHourglassHalf} />
+                &nbsp;{item.readyInMinutes} min &nbsp;
+                <FontAwesomeIcon icon={faChartPie} />
+                &nbsp; {item.servings} &nbsp;
+                {item.vegetarian ? (
+                  <FontAwesomeIcon
+                    icon={faLeaf}
+                    style={{ color: "green" }}
+                    onClick={handleDiet}
+                  />
+                ) : null}
+                &nbsp;&nbsp;
+                {item.veryHealthy ? (
+                  <FontAwesomeIcon
+                    icon={faBookMedical}
+                    style={{ color: "darkred" }}
+                  />
+                ) : null}
+              </Col>
+            </Row>
+          </Card.Body>
+          <Card.Footer>
+            <Row>
+              <Col>
+                <h6>{listCuisines(item.cuisines)}</h6>
+              </Col>
+            </Row>
+          </Card.Footer>
+        </Card>
+      </Col>
+    </Link>
   ));
 
   return (
