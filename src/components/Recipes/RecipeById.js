@@ -27,10 +27,10 @@ const RecipeById = (props) => {
   );
 
   return (
-    <Col large={8}>
+    <Col large={8} style={{ marginTop: "25px", marginLeft: "25px" }}>
       <Card primary>
         <Card.Header>
-          <Col small={6} large={6}>
+          <Col small={5} large={5}>
             <img
               src={
                 recipe.image ||
@@ -39,18 +39,18 @@ const RecipeById = (props) => {
               className="ResponsiveImage recipe-picture"
             />
           </Col>
-          <Col small={6} large={6}>
+          <Col small={5} large={5}>
             <Row>
               <h2>{recipe.title}</h2>
             </Row>
             <Row>
               <div>
-                <FontAwesomeIcon icon={faClock} />
-                Prep Time: {recipe.readyInMinutes} minutes
+                <FontAwesomeIcon icon={faClock} /> &nbsp;
+                <b>Prep Time:</b> {recipe.readyInMinutes} minutes
               </div>
               <div>
-                <FontAwesomeIcon icon={faUtensils} />
-                Yield: {recipe.servings} servings
+                <FontAwesomeIcon icon={faUtensils} /> &nbsp;
+                <b>Yield:</b> {recipe.servings} servings
               </div>
             </Row>
           </Col>
