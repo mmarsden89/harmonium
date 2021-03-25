@@ -7,6 +7,8 @@ import InputGroup from "harmonium/lib/InputGroup";
 import Button from "harmonium/lib/Button";
 import Input from "harmonium/lib/Input";
 
+import { Link } from "react-router-dom";
+
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faHourglassHalf,
@@ -35,14 +37,21 @@ const RecipeSearch = () => {
 
   const searchMap = searchReturn.slice(0, 10).map((item) => (
     <div className="search-item">
-      {item.title} <FontAwesomeIcon icon={faHourglassHalf} />
-      {item.readyInMinutes} min{" "}
-      {item.vegetarian ? (
-        <FontAwesomeIcon icon={faLeaf} style={{ color: "green" }} />
-      ) : null}
-      {item.veryHealthy ? (
-        <FontAwesomeIcon icon={faBookMedical} style={{ color: "darkred" }} />
-      ) : null}
+      <Link
+        to={{
+          pathname: `/recipes/${item.id}`,
+          state: { recipe: item },
+        }}
+      >
+        {item.title} <FontAwesomeIcon icon={faHourglassHalf} />
+        {item.readyInMinutes} min{" "}
+        {item.vegetarian ? (
+          <FontAwesomeIcon icon={faLeaf} style={{ color: "green" }} />
+        ) : null}
+        {item.veryHealthy ? (
+          <FontAwesomeIcon icon={faBookMedical} style={{ color: "darkred" }} />
+        ) : null}
+      </Link>
     </div>
   ));
 
