@@ -1,7 +1,7 @@
 .recipe-container {
   width: 100%;
-  margin-top: 100px;
-  padding: 0 50px;
+  margin-top: 150px;
+  padding: 0 150px;
 
   h6 {
     color: black;
@@ -10,6 +10,8 @@
   .card-header {
     background-color: #1761a0;
     color: white;
+    overflow-x: hidden;
+    white-space: nowrap;
   }
 
   .search-item {

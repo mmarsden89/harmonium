@@ -28,23 +28,6 @@ const Recipe = (props) => {
     setLoading(false);
   }, [diet, queryParams]);
 
-  const handleDietDefault = () => {
-    setDiet("");
-    setQueryParams([]);
-  };
-
-  const dietMap = queryParams.map((item) => (
-    <div className="query-tag">
-      <div>{item}</div>
-      <div
-        style={{ padding: "0px 5px", fontWeight: "900" }}
-        onClick={handleDietDefault}
-      >
-        x
-      </div>
-    </div>
-  ));
-
   const recipeMap = recipes.map((item) => (
     <Link
       to={{
@@ -83,7 +66,6 @@ const Recipe = (props) => {
   return (
     <div className="recipe-container">
       <RecipeSearch />
-      <div className="tag-container">{dietMap}</div>
       {!loading && recipeMap}
     </div>
   );
