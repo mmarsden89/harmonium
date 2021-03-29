@@ -6,13 +6,6 @@ import Col from "harmonium/lib/Col";
 import Row from "harmonium/lib/Row";
 import { titleShortener } from "../../utils.js";
 import "./Recipe.scss";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faHourglassHalf,
-  faLeaf,
-  faBookMedical,
-  faChartPie,
-} from "@fortawesome/free-solid-svg-icons";
 
 import { Link } from "react-router-dom";
 
@@ -34,18 +27,6 @@ const Recipe = (props) => {
     setRecipes(dummy);
     setLoading(false);
   }, [diet, queryParams]);
-
-  const listCuisines = (cuisines) => {
-    return cuisines.length > 0
-      ? cuisines.map((cuisine) => `${cuisine} `)
-      : "none";
-  };
-
-  const handleDiet = () => {
-    setDiet("vegetarian");
-    setContext("complexSearch");
-    setQueryParams([...queryParams, "vegetarian"]);
-  };
 
   const handleDietDefault = () => {
     setDiet("");
@@ -71,57 +52,29 @@ const Recipe = (props) => {
         state: { recipe: item },
       }}
     >
-      <Col large={3}>
+      <Col small={4} large={4}>
         <Card primary>
-          <Card.Header>
-            <Row className="rev-Row--flex rev-Row--middle">
+          <Card.Header className="card-header">
+            <Row>
               <Col>
                 <h5>{titleShortener(item.title)}</h5>
               </Col>
             </Row>
           </Card.Header>
           <Card.Body>
-            <Row>
-              <Col>
+            <Row style={{ padding: 0 }}>
+              <Col style={{ padding: 0 }}>
                 <img
                   src={
                     item.image ||
                     process.env.PUBLIC_URL + "/images/noimageavailable.png"
                   }
+                  style={{ padding: 0, margin: 0 }}
                   className="ResponsiveImage"
                 />
               </Col>
             </Row>
-            <Row>
-              <Col>
-                <FontAwesomeIcon icon={faHourglassHalf} />
-                &nbsp;{item.readyInMinutes} min &nbsp;
-                <FontAwesomeIcon icon={faChartPie} />
-                &nbsp; {item.servings} &nbsp;
-                {item.vegetarian ? (
-                  <FontAwesomeIcon
-                    icon={faLeaf}
-                    style={{ color: "green" }}
-                    onClick={handleDiet}
-                  />
-                ) : null}
-                &nbsp;&nbsp;
-                {item.veryHealthy ? (
-                  <FontAwesomeIcon
-                    icon={faBookMedical}
-                    style={{ color: "darkred" }}
-                  />
-                ) : null}
-              </Col>
-            </Row>
           </Card.Body>
-          <Card.Footer>
-            <Row>
-              <Col>
-                <h6>{listCuisines(item.cuisines)}</h6>
-              </Col>
-            </Row>
-          </Card.Footer>
         </Card>
       </Col>
     </Link>
