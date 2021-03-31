@@ -1,5 +1,5 @@
 .recipe-container {
-  height: 90vh;
+  min-height: 100vh;
   width: 100%;
   margin-top: 150px;
   padding: 0 150px;
@@ -54,10 +54,18 @@
   }
 }
 
-.ingredients-list {
-  background-color: lightblue;
-  padding: 15px;
-  margin: 24px 0;
+.recipe-by-id-container {
+  //   height: 100%;
+  min-height: 100vh;
+  width: 100%;
+  margin-top: 100px;
+  //   position: relative;
+
+  .ingredients-list {
+    background-color: lightblue;
+    padding: 15px;
+    margin: 24px 0;
+  }
 }
 
 .recipe-picture {

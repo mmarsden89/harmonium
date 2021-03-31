@@ -27,50 +27,53 @@ const RecipeById = (props) => {
   );
 
   return (
-    <Col large={8} style={{ marginTop: "25px", marginLeft: "25px" }}>
-      <Card primary>
-        <Card.Header>
-          <Col small={5} large={5}>
-            <img
-              src={
-                recipe.image ||
-                process.env.PUBLIC_URL + "/images/noimageavailable.png"
-              }
-              className="ResponsiveImage recipe-picture"
-            />
-          </Col>
-          <Col small={5} large={5}>
-            <Row>
-              <h2>{recipe.title}</h2>
-            </Row>
-            <Row>
-              <div>
-                <FontAwesomeIcon icon={faClock} /> &nbsp;
-                <b>Prep Time:</b> {recipe.readyInMinutes} minutes
-              </div>
-              <div>
-                <FontAwesomeIcon icon={faUtensils} /> &nbsp;
-                <b>Yield:</b> {recipe.servings} servings
-              </div>
-            </Row>
-          </Col>
-        </Card.Header>
-        <Card.Body>
-          <Row>
-            <Col large={8} className="ingredients-list">
-              {ingredientsMap}
+    <div className="recipe-by-id-container">
+      <Col large={8}>
+        <Card primary>
+          <Card.Header>
+            <Col small={5} large={5}>
+              <img
+                src={
+                  recipe.image ||
+                  process.env.PUBLIC_URL + "/images/noimageavailable.png"
+                }
+                className="ResponsiveImage recipe-picture"
+              />
             </Col>
-            <Col large={4}></Col>
-          </Row>
+            <Col small={5} large={5}>
+              <Row>
+                <h2>{recipe.title}</h2>
+              </Row>
+              <Row>
+                <div>
+                  <FontAwesomeIcon icon={faClock} /> &nbsp;
+                  <b>Prep Time:</b> {recipe.readyInMinutes} minutes
+                </div>
+                <div>
+                  <FontAwesomeIcon icon={faUtensils} /> &nbsp;
+                  <b>Yield:</b> {recipe.servings} servings
+                </div>
+              </Row>
+            </Col>
+            <Row>{recipe.summary}</Row>
+          </Card.Header>
+          <Card.Body>
+            <Row>
+              <Col large={8} className="ingredients-list">
+                {ingredientsMap}
+              </Col>
+              <Col large={4}></Col>
+            </Row>
 
-          <Row>
-            <Col large={10}>
-              <ol>{instructionsMap}</ol>
-            </Col>
-          </Row>
-        </Card.Body>
-      </Card>
-    </Col>
+            <Row>
+              <Col large={10}>
+                <ol>{instructionsMap}</ol>
+              </Col>
+            </Row>
+          </Card.Body>
+        </Card>
+      </Col>
+    </div>
   );
 };
 
