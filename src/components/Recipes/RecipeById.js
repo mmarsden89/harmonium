@@ -3,14 +3,10 @@ import Recipe from "./Recipe";
 import Card from "harmonium/lib/Card";
 import Col from "harmonium/lib/Col";
 import Row from "harmonium/lib/Row";
+import dompurify from "dompurify";
 import "./Recipe.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faClock,
-  faUtensils,
-  faBookMedical,
-  faChartPie,
-} from "@fortawesome/free-solid-svg-icons";
+import { faClock, faUtensils, faStar } from "@fortawesome/free-solid-svg-icons";
 
 const RecipeById = (props) => {
   console.log("props--->", props.location.state.recipe);
@@ -26,12 +22,25 @@ const RecipeById = (props) => {
     (instruction) => <li>{instruction.step}</li>
   );
 
+  const sanitizer = dompurify.sanitize;
+
+  const removeLinks = (str) => {
+    let split = str.split(".");
+    let arr = [];
+    for (let i = 0; i < split.length; i++) {
+      if (!split[i].includes("<a") && !split[i].includes("/a>")) {
+        arr.push(split[i]);
+      }
+    }
+    return arr.join(".");
+  };
+
   return (
     <div className="recipe-by-id-container">
       <Col large={8}>
         <Card primary>
           <Card.Header>
-            <Col small={5} large={5}>
+            <Col small={5} large={5} style={{ padding: "0 50px" }}>
               <img
                 src={
                   recipe.image ||
@@ -40,7 +49,7 @@ const RecipeById = (props) => {
                 className="ResponsiveImage recipe-picture"
               />
             </Col>
-            <Col small={5} large={5}>
+            <Col small={7} large={7} style={{ paddingTop: "10px" }}>
               <Row>
                 <h2>{recipe.title}</h2>
               </Row>
@@ -53,19 +62,28 @@ const RecipeById = (props) => {
                   <FontAwesomeIcon icon={faUtensils} /> &nbsp;
                   <b>Yield:</b> {recipe.servings} servings
                 </div>
+                <div>
+                  <FontAwesomeIcon icon={faStar} /> &nbsp;
+                  <b>Score:</b> {recipe.spoonacularScore} %
+                </div>
               </Row>
             </Col>
-            <Row>{recipe.summary}</Row>
+            <Row
+              style={{ padding: "25px 50px" }}
+              dangerouslySetInnerHTML={{
+                __html: removeLinks(sanitizer(recipe.summary)),
+              }}
+            ></Row>
           </Card.Header>
           <Card.Body>
-            <Row>
+            <Row style={{ padding: "0 50px" }}>
               <Col large={8} className="ingredients-list">
                 {ingredientsMap}
               </Col>
               <Col large={4}></Col>
             </Row>
 
-            <Row>
+            <Row style={{ padding: "0 50px" }}>
               <Col large={10}>
                 <ol>{instructionsMap}</ol>
               </Col>

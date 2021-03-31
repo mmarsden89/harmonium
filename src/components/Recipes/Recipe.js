@@ -11,6 +11,8 @@ import { Link } from "react-router-dom";
 
 import dummy from "../../dummy.json";
 
+import RecipeCard from "./RecipeCard";
+
 const Recipe = (props) => {
   const [recipes, setRecipes] = useState([]);
   const [diet, setDiet] = useState("");
@@ -29,38 +31,12 @@ const Recipe = (props) => {
   }, [diet, queryParams]);
 
   const recipeMap = recipes.map((item) => (
-    <Link
-      to={{
-        pathname: `/recipes/${item.id}`,
-        state: { recipe: item },
-      }}
-    >
-      <Col small={4} large={4}>
-        <Card primary>
-          <Card.Header className="card-header">
-            <Row>
-              <Col>
-                <h5>{titleShortener(item.title)}</h5>
-              </Col>
-            </Row>
-          </Card.Header>
-          <Card.Body>
-            <Row style={{ padding: 0 }}>
-              <Col style={{ padding: 0 }}>
-                <img
-                  src={
-                    item.image ||
-                    process.env.PUBLIC_URL + "/images/noimageavailable.png"
-                  }
-                  style={{ padding: 0, margin: 0 }}
-                  className="ResponsiveImage"
-                />
-              </Col>
-            </Row>
-          </Card.Body>
-        </Card>
-      </Col>
-    </Link>
+    <RecipeCard
+      id={item.id}
+      title={item.title}
+      image={item.image}
+      item={item}
+    />
   ));
 
   return (
