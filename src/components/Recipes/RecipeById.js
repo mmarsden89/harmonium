@@ -1,15 +1,16 @@
 import React, { useEffect, useState } from "react";
-import Recipe from "./Recipe";
+import "./Recipe.scss";
 import Card from "harmonium/lib/Card";
 import Col from "harmonium/lib/Col";
 import Row from "harmonium/lib/Row";
 import dompurify from "dompurify";
-import "./Recipe.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faClock, faUtensils, faStar } from "@fortawesome/free-solid-svg-icons";
 import { faCreativeCommonsBy } from "@fortawesome/free-brands-svg-icons";
 import RecipeCard from "./RecipeCard";
 import { getSimilarRecipes } from "../api.js";
+
+import dummysimilar from "../../dummysimilar.json";
 
 const RecipeById = (props) => {
   const { state } = props.location;
@@ -21,10 +22,10 @@ const RecipeById = (props) => {
 
   useEffect(async () => {
     setLoading(true);
-    const data = await getSimilarRecipes(recipe.id);
-    setSimilarRecipes(data);
+    // const data = await getSimilarRecipes(recipe.id);
+    // setSimilarRecipes(data);
+    setSimilarRecipes(dummysimilar);
     setLoading(false);
-    console.log("heres data-->", data.length);
   }, []);
 
   const ingredientsMap = recipe.extendedIngredients.map((ingredient) => (
@@ -49,7 +50,7 @@ const RecipeById = (props) => {
   };
 
   const similarMap = similarRecipes.map((item) => (
-    <RecipeCard item={item} size={10} />
+    <RecipeCard item={item} size={12} />
   ));
 
   const loadingCheck = () => {
@@ -123,7 +124,9 @@ const RecipeById = (props) => {
           </Card.Body>
         </Card>
       </Col>
-      <Col large={4}>{loadingCheck()}</Col>
+      <Col large={4} className="similar-recipe-container">
+        {loadingCheck()}
+      </Col>
     </div>
   );
 };

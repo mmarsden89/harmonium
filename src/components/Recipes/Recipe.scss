@@ -56,10 +56,32 @@
 
 .recipe-by-id-container {
   //   height: 100%;
-  min-height: 100vh;
   width: 100%;
   margin-top: 100px;
+
+  .similar-recipe-container {
+    background-color: #1761a0;
+    width: 400px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 25px 0;
+    margin-left: 15px;
+  }
+
+  .similar-recipe-container > a {
+    // width: 200px;
+    padding: 0 25px;
+  }
   //   position: relative;
+
+  //   .card-header {
+  //     background-color: #1761a0;
+  //     color: white;
+  //     overflow-x: hidden;
+  //     white-space: nowrap;
+  //   }
 
   .ingredients-list {
     background-color: lightblue;
