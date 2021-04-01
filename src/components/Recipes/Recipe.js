@@ -30,14 +30,7 @@ const Recipe = (props) => {
     setLoading(false);
   }, [diet, queryParams]);
 
-  const recipeMap = recipes.map((item) => (
-    <RecipeCard
-      id={item.id}
-      title={item.title}
-      image={item.image}
-      item={item}
-    />
-  ));
+  const recipeMap = recipes.map((item) => <RecipeCard item={item} size={4} />);
 
   return (
     <div className="recipe-container">

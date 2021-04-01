@@ -5,8 +5,11 @@ import { Link } from "react-router-dom";
 import { titleShortener } from "../../utils.js";
 
 const RecipeCard = (props) => {
-  console.log("props--->", props);
-  const { id, title, image, item } = props;
+  const {
+    item,
+    size,
+    item: { id, title, image },
+  } = props;
   return (
     <Link
       to={{
@@ -14,7 +17,7 @@ const RecipeCard = (props) => {
         state: { recipe: item },
       }}
     >
-      <Col small={4} large={4}>
+      <Col small={size || 12} large={size || 12}>
         <Card primary>
           <Card.Header className="card-header">
             <Row>

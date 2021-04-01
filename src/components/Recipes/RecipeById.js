@@ -7,12 +7,25 @@ import dompurify from "dompurify";
 import "./Recipe.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faClock, faUtensils, faStar } from "@fortawesome/free-solid-svg-icons";
+import { faCreativeCommonsBy } from "@fortawesome/free-brands-svg-icons";
+import RecipeCard from "./RecipeCard";
+import { getSimilarRecipes } from "../api.js";
 
 const RecipeById = (props) => {
-  console.log("props--->", props.location.state.recipe);
   const { state } = props.location;
 
   const { recipe } = props.location.state;
+
+  const [similarRecipes, setSimilarRecipes] = useState([]);
+  const [loading, setLoading] = useState(false);
+
+  useEffect(async () => {
+    setLoading(true);
+    const data = await getSimilarRecipes(recipe.id);
+    setSimilarRecipes(data);
+    setLoading(false);
+    console.log("heres data-->", data.length);
+  }, []);
 
   const ingredientsMap = recipe.extendedIngredients.map((ingredient) => (
     <div>{ingredient.original}</div>
@@ -33,6 +46,18 @@ const RecipeById = (props) => {
       }
     }
     return arr.join(".");
+  };
+
+  const similarMap = similarRecipes.map((item) => (
+    <RecipeCard item={item} size={10} />
+  ));
+
+  const loadingCheck = () => {
+    if (loading) {
+      return <div>loading</div>;
+    } else {
+      return similarMap;
+    }
   };
 
   return (
@@ -67,6 +92,13 @@ const RecipeById = (props) => {
                   <b>Score:</b> {recipe.spoonacularScore} %
                 </div>
               </Row>
+
+              <Row style={{ marginTop: "45px" }}>
+                <div style={{ fontSize: "10px" }}>
+                  <FontAwesomeIcon icon={faCreativeCommonsBy} /> &nbsp;
+                  <b>Source:</b> {recipe.sourceUrl}
+                </div>
+              </Row>
             </Col>
             <Row
               style={{ padding: "25px 50px" }}
@@ -91,6 +123,7 @@ const RecipeById = (props) => {
           </Card.Body>
         </Card>
       </Col>
+      <Col large={4}>{loadingCheck()}</Col>
     </div>
   );
 };
