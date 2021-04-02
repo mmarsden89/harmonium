@@ -14,7 +14,6 @@ import dummysimilar from "../../dummysimilar.json";
 
 const RecipeById = (props) => {
   const { state } = props.location;
-
   const { recipe } = props.location.state;
 
   const [similarRecipes, setSimilarRecipes] = useState([]);
