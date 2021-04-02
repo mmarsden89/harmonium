@@ -32,7 +32,7 @@ const getSimilarRecipes = async (id) => {
   const apiData = await axios(url);
 
   for (let i = 0; i < apiData.data.length; i++) {
-    const individualUrl = `https://api.spoonacular.com/recipes/${apiData.data[i].id}/information?${api_key}`;
+    const individualUrl = `https://api.spoonacular.com/recipes/${apiData.data[i].id}/information?${api_key}&instructionsRequired=true`;
     const similarData = await axios(individualUrl);
     returnedData.push(similarData.data);
   }

@@ -22,11 +22,11 @@ const RecipeById = (props) => {
 
   useEffect(async () => {
     setLoading(true);
-    // const data = await getSimilarRecipes(recipe.id);
-    // setSimilarRecipes(data);
-    setSimilarRecipes(dummysimilar);
+    const data = await getSimilarRecipes(recipe.id);
+    setSimilarRecipes(data);
+    // setSimilarRecipes(dummysimilar);
     setLoading(false);
-  }, []);
+  }, [recipe]);
 
   const ingredientsMap = recipe.extendedIngredients.map((ingredient) => (
     <div>{ingredient.original}</div>
@@ -53,13 +53,14 @@ const RecipeById = (props) => {
     <RecipeCard item={item} size={12} />
   ));
 
-  const loadingCheck = () => {
-    if (loading) {
-      return <div>loading</div>;
-    } else {
-      return similarMap;
-    }
-  };
+  const similarContainer = (
+    <Col large={4} className="similar-recipe-container">
+      <div>
+        <h2 style={{ color: "white" }}>Similar Recipes</h2>
+      </div>
+      {similarMap}
+    </Col>
+  );
 
   return (
     <div className="recipe-by-id-container">
@@ -118,15 +119,13 @@ const RecipeById = (props) => {
 
             <Row style={{ padding: "0 50px" }}>
               <Col large={10}>
-                <ol>{instructionsMap}</ol>
+                <ol>{instructionsMap || null}</ol>
               </Col>
             </Row>
           </Card.Body>
         </Card>
       </Col>
-      <Col large={4} className="similar-recipe-container">
-        {loadingCheck()}
-      </Col>
+      {similarContainer}
     </div>
   );
 };
