@@ -22,9 +22,9 @@ const RecipeById = (props) => {
 
   useEffect(async () => {
     setLoading(true);
-    const data = await getSimilarRecipes(recipe.id);
-    setSimilarRecipes(data);
-    // setSimilarRecipes(dummysimilar);
+    // const data = await getSimilarRecipes(recipe.id);
+    // setSimilarRecipes(data);
+    setSimilarRecipes(dummysimilar);
     setLoading(false);
   }, [recipe]);
 
