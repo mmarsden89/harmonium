@@ -18,10 +18,10 @@ const fetchRecipes = async (context, diet) => {
 };
 
 const searchRecipes = async (query) => {
-  const url = `https://api.spoonacular.com/recipes/complexSearch?query=${query}&${api_key}`;
+  const url = `https://api.spoonacular.com/recipes/complexSearch?query=${query}&${api_key}&number=10&instructionsRequired=true&addRecipeInformation=true`;
 
   const apiData = await axios(url);
-
+  console.log("search results===>", apiData.data.results);
   return apiData.data.results;
 };
 
