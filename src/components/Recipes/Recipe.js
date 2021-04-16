@@ -22,11 +22,11 @@ const Recipe = (props) => {
 
   useEffect(async () => {
     setLoading(true);
-    // const recipesFetch = await fetchRecipes(context, diet);
-    // setRecipes(recipesFetch);
-    // console.log("recipe---s>>>", recipesFetch);
-    console.log("dummy--->", dummy);
-    setRecipes(dummy);
+    const recipesFetch = await fetchRecipes(context, diet);
+    setRecipes(recipesFetch);
+    console.log("recipe---s>>>", recipesFetch);
+    // console.log("dummy--->", dummy);
+    // setRecipes(dummy);
     setLoading(false);
   }, [diet, queryParams]);
 

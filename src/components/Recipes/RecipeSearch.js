@@ -21,36 +21,48 @@ import { searchRecipes } from "../api.js";
 
 const RecipeSearch = () => {
   const [searchReturn, setSearchReturn] = useState([]);
+  const [show, setShow] = useState(true);
 
   useEffect(() => {}, [searchReturn]);
 
   const handleChange = async (e) => {
-    console.log(e.target.value);
+    setShow(true);
     if (e.target.value.length > 1) {
-      // const data = await searchRecipes(e.target.value);
-      // setSearchReturn(data);
-      setSearchReturn(dummy);
+      const data = await searchRecipes(e.target.value);
+      setSearchReturn(data);
     } else {
       setSearchReturn([]);
     }
   };
 
-  const searchMap = searchReturn.slice(0, 10).map((item) => (
+  const searchMap = searchReturn.map((item) => (
     <div className="search-item">
       <Link
         to={{
           pathname: `/recipes/${item.id}`,
           state: { recipe: item },
         }}
+        className="search-return-container"
       >
-        {item.title} <FontAwesomeIcon icon={faHourglassHalf} />
-        {item.readyInMinutes} min{" "}
-        {item.vegetarian ? (
-          <FontAwesomeIcon icon={faLeaf} style={{ color: "green" }} />
-        ) : null}
-        {item.veryHealthy ? (
-          <FontAwesomeIcon icon={faBookMedical} style={{ color: "darkred" }} />
-        ) : null}
+        <div>{item.title}</div>{" "}
+        <div>
+          {item.vegetarian ? (
+            <FontAwesomeIcon
+              icon={faLeaf}
+              style={{ color: "green" }}
+              className="icon-padding"
+            />
+          ) : null}
+          {item.veryHealthy ? (
+            <FontAwesomeIcon
+              icon={faBookMedical}
+              style={{ color: "darkred" }}
+              className="icon-padding"
+            />
+          ) : null}
+          <FontAwesomeIcon icon={faHourglassHalf} className="icon-padding" />
+          {item.readyInMinutes} min{" "}
+        </div>
       </Link>
     </div>
   ));
@@ -79,7 +91,7 @@ const RecipeSearch = () => {
         </InputGroup.Field>
         <Button>Search</Button>
       </InputGroup>
-      {searchReturn.length > 0 && searchReturnHtml}
+      {searchReturn.length > 0 && show && searchReturnHtml}
     </Form>
   );
 };

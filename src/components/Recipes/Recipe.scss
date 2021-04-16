@@ -98,3 +98,14 @@
   padding: 5px;
   border: 1px solid black;
 }
+
+.search-return-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 0 5px;
+}
+
+.icon-padding {
+  margin: 0 7px;
+}

@@ -15,15 +15,16 @@ import dummysimilar from "../../dummysimilar.json";
 const RecipeById = (props) => {
   const { state } = props.location;
   const { recipe } = props.location.state;
+  console.log("recipe===>", recipe);
 
   const [similarRecipes, setSimilarRecipes] = useState([]);
   const [loading, setLoading] = useState(false);
 
   useEffect(async () => {
     setLoading(true);
-    // const data = await getSimilarRecipes(recipe.id);
-    // setSimilarRecipes(data);
-    setSimilarRecipes(dummysimilar);
+    const data = await getSimilarRecipes(recipe.id);
+    setSimilarRecipes(data);
+    // setSimilarRecipes(dummysimilar);
     setLoading(false);
   }, [recipe]);
 
@@ -93,13 +94,6 @@ const RecipeById = (props) => {
                   <b>Score:</b> {recipe.spoonacularScore} %
                 </div>
               </Row>
-
-              <Row style={{ marginTop: "45px" }}>
-                <div style={{ fontSize: "10px" }}>
-                  <FontAwesomeIcon icon={faCreativeCommonsBy} /> &nbsp;
-                  <b>Source:</b> {recipe.sourceUrl}
-                </div>
-              </Row>
             </Col>
             <Row
               style={{ padding: "25px 50px" }}
@@ -110,6 +104,7 @@ const RecipeById = (props) => {
           </Card.Header>
           <Card.Body>
             <Row style={{ padding: "0 50px" }}>
+              <h4>ingredients</h4>
               <Col large={8} className="ingredients-list">
                 {ingredientsMap}
               </Col>
@@ -117,9 +112,19 @@ const RecipeById = (props) => {
             </Row>
 
             <Row style={{ padding: "0 50px" }}>
+              <h4>instructions</h4>
               <Col large={10}>
                 <ol>{instructionsMap || null}</ol>
               </Col>
+            </Row>
+            <Row style={{ marginTop: "45px" }}>
+              <div style={{ fontSize: "10px" }}>
+                <FontAwesomeIcon icon={faCreativeCommonsBy} /> &nbsp;
+                <b>Source:</b>{" "}
+                <a href={recipe.sourceUrl} target="_blank">
+                  {recipe.sourceUrl}
+                </a>
+              </div>
             </Row>
           </Card.Body>
         </Card>
