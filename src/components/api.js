@@ -10,7 +10,7 @@ const fetchRecipes = async (context, diet) => {
     complexSearch: `complexSearch?&diet=${diet}&addRecipeInformation=true`,
   };
 
-  const url = `${base_url}${contextMap[context]}&number=20&${api_key}`;
+  const url = `${base_url}${contextMap[context]}&number=6&${api_key}`;
 
   const apiData = await axios(url);
 
@@ -26,8 +26,8 @@ const searchRecipes = async (query) => {
 };
 
 const getSimilarRecipes = async (id) => {
-  const returnedData = [];
-  const url = `https://api.spoonacular.com/recipes/${id}/similar?${api_key}&number=3`;
+  let returnedData = [];
+  const url = `https://api.spoonacular.com/recipes/${id}/similar?${api_key}&number=6`;
 
   const apiData = await axios(url);
 
@@ -36,6 +36,12 @@ const getSimilarRecipes = async (id) => {
     const similarData = await axios(individualUrl);
     returnedData.push(similarData.data);
   }
+
+  returnedData = returnedData
+    .filter((data) => {
+      return data.analyzedInstructions !== null;
+    })
+    .slice(0, 3);
 
   console.log("returned", returnedData);
   return returnedData;
