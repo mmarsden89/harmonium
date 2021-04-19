@@ -22,11 +22,13 @@ import { searchRecipes } from "../api.js";
 const RecipeSearch = () => {
   const [searchReturn, setSearchReturn] = useState([]);
   const [show, setShow] = useState(true);
+  const [query, setQuery] = useState("");
 
-  useEffect(() => {}, [searchReturn]);
+  useEffect(() => {}, [searchReturn, show, query]);
 
   const handleChange = async (e) => {
     setShow(true);
+    setQuery(e.target.value);
     if (e.target.value.length > 1) {
       const data = await searchRecipes(e.target.value);
       setSearchReturn(data);
@@ -89,7 +91,14 @@ const RecipeSearch = () => {
             onChange={handleChange}
           />
         </InputGroup.Field>
-        <Button>Search</Button>
+        <Link
+          to={{
+            pathname: `/search/${query}`,
+            state: { query: query },
+          }}
+        >
+          <Button>Search</Button>
+        </Link>
       </InputGroup>
       {searchReturn.length > 0 && show && searchReturnHtml}
     </Form>
