@@ -47,4 +47,12 @@ const getSimilarRecipes = async (id) => {
   return returnedData;
 };
 
-export { fetchRecipes, searchRecipes, getSimilarRecipes };
+const searchAllRecipes = async (query) => {
+  const url = `https://api.spoonacular.com/recipes/complexSearch?query=${query}&${api_key}&number=100`;
+
+  const apiData = await axios(url);
+
+  console.log("heres the call-->", apiData);
+};
+
+export { fetchRecipes, searchRecipes, getSimilarRecipes, searchAllRecipes };
