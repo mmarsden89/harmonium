@@ -52,7 +52,7 @@ const searchAllRecipes = async (query) => {
 
   const apiData = await axios(url);
 
-  console.log("heres the call-->", apiData);
+  return apiData.data.results;
 };
 
 export { fetchRecipes, searchRecipes, getSimilarRecipes, searchAllRecipes };
