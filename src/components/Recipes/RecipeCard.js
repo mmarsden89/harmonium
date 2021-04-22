@@ -34,8 +34,14 @@ const RecipeCard = (props) => {
                     image ||
                     process.env.PUBLIC_URL + "/images/noimageavailable.png"
                   }
-                  style={{ padding: 0, margin: 0 }}
-                  className="ResponsiveImage"
+                  style={{
+                    padding: 0,
+                    margin: 0,
+                    float: "left",
+                    width: "100%",
+                    height: "100%",
+                    objectFit: "cover",
+                  }}
                 />
               </Col>
             </Row>
